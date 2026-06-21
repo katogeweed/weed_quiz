@@ -7,6 +7,9 @@
  ## レビュー
  code rabbitを追加
 
+ ## PR
+pull_request_template.mdにPRのテンプレを追加
+
 ```bash
 # 依存関係のインストール
 $ pnpm install
