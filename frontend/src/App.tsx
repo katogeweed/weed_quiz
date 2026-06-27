@@ -6,7 +6,7 @@ import './App.css'
 
 function App(){
   // 今何問目を解いているかを記録する
-  const [currentQuestionIndex,setcurrentQuestionIndex]=useState(0)
+  const [currentQuestionIndex,setCurrentQuestionIndex]=useState(0)
 
   const currentQuiz = quizData[currentQuestionIndex]
 
@@ -15,18 +15,28 @@ function App(){
       alert("正解")
     else
       alert("不正解")
+
+    const nextIndex = currentQuestionIndex + 1
+    console.log(nextIndex)
+    if (nextIndex < quizData.length){
+      setCurrentQuestionIndex(nextIndex);
+    }else{
+      alert("全問終了")
+    }
   }
+
 
   return (
     <div>
       <h1>雑草クイズアプリ</h1>
 
-      <h2>
+      <p>
         {currentQuiz.context}
-      </h2>
+      </p>
       <div>
           {currentQuiz.choices.map((choice,index) =>(
             <button key={index} 
+            //クリックされたら handleAnswerClick に index を渡して実行するという無名関数をその場で作って、ボタンに渡している
               onClick={()=>handleAnswerClick(index)}
             >{choice}</button>
           ))}
