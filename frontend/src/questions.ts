@@ -3,7 +3,7 @@ import type { Quiz } from './types'
 export const quizData: Quiz[]=[
     {
         "id": 1,
-        "context": "ほそあおげいとうは何科？",
+        "context": "ホソアオゲイトウは何科？",
         "choices": ["ヒユ科", "イネ科", "キク科", "マメ科"],
         "correct": 0
     },
