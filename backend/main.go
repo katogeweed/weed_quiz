@@ -14,6 +14,9 @@ type ResponseData struct {
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+
+		//CORSを発行する。これにより、セキュリティの壁を突破してReactがgoのデータを受け取れるようになる。
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		// 今から返すのはJSONですよ
 		w.Header().Set("Content-Type", "application/json")
 
