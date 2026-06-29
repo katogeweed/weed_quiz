@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { quizData } from './questions'
 import './App.css'
 
@@ -7,9 +7,20 @@ import './App.css'
 function App(){
   // 今何問目を解いているかを記録する
   const [currentQuestionIndex,setCurrentQuestionIndex]=useState(0)
-
   const [score,setScore] = useState(0)
   const [isFinished,setIsFinished] = useState(false)
+
+  const [backendMessage, setBackendMessage] = useState("")
+  useEffect(() => {
+    fetch("http://localhost:8080/")
+      .then(response => response.json())            
+      //.then(...)（〜が終わったら、次に）
+      // 通信は一瞬ではなく「待ち時間」が発生します。そのため、「データが届くのを待って、届いたら次にこの処理をやってね」と予約をするのが .then
+      .then(data => {
+        setBackendMessage(data.message)
+      })
+      .catch(error => console.error("通信エラー:",error))//thenがうまく行かなかった時にブロックするのがcatch
+  }, [])//最後のからの配列は超重要で画面が最初に表示された時の『1回だけ』実行してね」というおまじない
 
   const currentQuiz = quizData[currentQuestionIndex]
 
@@ -45,6 +56,10 @@ function App(){
   return (
     <div>
       <h1>雑草クイズアプリ</h1>
+
+      <p style={{ color: "blue",fontWeight: "bold"}}>
+        バックエンド通信{backendMessage}
+      </p>
 
       <p>
         {currentQuiz.context}
