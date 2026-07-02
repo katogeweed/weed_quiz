@@ -51,11 +51,20 @@ function App(){
     }
   }
 
+  const handleRestart = () =>{
+    setCurrentQuestionIndex(0)
+    setScore(0)
+
+    setIsFinished(false)
+  }
+
   if(isFinished){
     return(
       <div>
         <h1>クイズ終了！</h1>
         <p>{quizzes.length}問中{score}正解！</p>
+
+        <button onClick={handleRestart}>もう一度遊ぶ</button>
       </div>
     )
 
